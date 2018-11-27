@@ -23,6 +23,7 @@ namespace task3
         public MainWindow()
         {
             InitializeComponent();
+            ContactBase cb = new ContactBase();
         }
     }
 }

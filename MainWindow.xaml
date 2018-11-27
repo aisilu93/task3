@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:task3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="PhoneBook" Height="450" Width="800">
     <Grid>
-        
+        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="792">
+            <MenuItem Header="New Contact"></MenuItem>
+            <MenuItem Header="About"></MenuItem>
+            <MenuItem Header="Exit"></MenuItem>
+        </Menu>
+
     </Grid>
 </Window>
