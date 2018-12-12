@@ -25,7 +25,7 @@ namespace task3
         {
             InitializeComponent();
             cb = new ContactBase();
-            grid.ItemsSource = cb;
+            grid.ItemsSource = cb.contacts;
 
         }
         public void close(object sender, RoutedEventArgs e)
