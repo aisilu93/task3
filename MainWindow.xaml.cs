@@ -20,10 +20,30 @@ namespace task3
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ContactBase cb;
         public MainWindow()
         {
             InitializeComponent();
-            ContactBase cb = new ContactBase();
+            cb = new ContactBase();
+            grid.ItemsSource = cb;
+
+        }
+        public void close(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        public void new_user(object sender, RoutedEventArgs e)
+        {
+            UserInfo uinf = new UserInfo();
+            uinf.Owner = this;
+            uinf.Show();
+        }
+        public void grid_click(object sender, MouseButtonEventArgs e)
+        {
+            Contact c = grid.SelectedItem as Contact;
+            UserInfo uinf = new UserInfo(c);
+            uinf.Owner = this;
+            uinf.Show();
         }
     }
 }

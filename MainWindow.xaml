@@ -5,13 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:task3"
         mc:Ignorable="d"
-        Title="PhoneBook" Height="450" Width="800">
+        Title="PhoneBook" Height="450" Width="800"
+        MinHeight="450" MinWidth="800">
     <Grid>
-        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="792">
-            <MenuItem Header="New Contact"></MenuItem>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Height="20" VerticalAlignment="Top">
+            <MenuItem Header="New Contact" Click="new_user"></MenuItem>
             <MenuItem Header="About"></MenuItem>
-            <MenuItem Header="Exit"></MenuItem>
+            <MenuItem Header="Exit" Click="close"></MenuItem>
         </Menu>
+        <DataGrid Name="grid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <EventSetter Event="MouseDoubleClick" Handler="grid_click"/>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=m_name}"/>
+                <DataGridTextColumn Header="Workphone" Binding="{Binding Path=m_workphone}"/>
+                <DataGridTextColumn Header="Homephone" Binding="{Binding Path=m_homephone}"/>
+                <DataGridTextColumn Header="E-Mail" Binding="{Binding Path=m_email}"/>
+                <DataGridTextColumn Header="Skype" Binding="{Binding Path=m_skype}"/>
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Path=m_birhday}"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Path=m_comment}"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>
