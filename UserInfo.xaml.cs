@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace task3
 {
@@ -57,21 +58,33 @@ namespace task3
         }
         private void CloseCmd_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if(!new_contact) contact = contact_copy;
+            if (!new_contact)
+            {
+                MainWindow mw = this.Owner as MainWindow;
+                mw.cb.Delete(contact);
+                mw.cb.Add(contact_copy);
+                mw.grid.ItemsSource = null;
+                mw.grid.ItemsSource = mw.cb.contacts;
+            }
             this.Close();
         }
         private void SaveCmd_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            contact.m_birthday = datepicker.SelectedDate.Value.Date.ToString("MMMM", CultureInfo.CreateSpecificCulture("us-US")) + ", "+ datepicker.SelectedDate.Value.Date.Day.ToString();
             MainWindow mw = this.Owner as MainWindow;
             if (new_contact) mw.cb.Add(contact);
+            mw.grid.ItemsSource = null;
+            mw.cb.contacts.Sort();
+            mw.grid.ItemsSource = mw.cb.contacts;
             this.Close();
         }
         private void DeleteCmd_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             MainWindow mw = this.Owner as MainWindow;
             mw.cb.Delete(contact);
+            mw.grid.ItemsSource = null;
+            mw.grid.ItemsSource = mw.cb.contacts;
             this.Close();
         }
     }
-
 }

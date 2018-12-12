@@ -26,7 +26,6 @@ namespace task3
             InitializeComponent();
             cb = new ContactBase();
             grid.ItemsSource = cb.contacts;
-
         }
         public void close(object sender, RoutedEventArgs e)
         {
@@ -46,4 +45,4 @@ namespace task3
             uinf.Show();
         }
     }
-}
+ }

@@ -31,7 +31,7 @@
                 <DataGridTextColumn Header="Homephone" Binding="{Binding Path=m_homephone}"/>
                 <DataGridTextColumn Header="E-Mail" Binding="{Binding Path=m_email}"/>
                 <DataGridTextColumn Header="Skype" Binding="{Binding Path=m_skype}"/>
-                <DataGridTextColumn Header="Birthday" Binding="{Binding Path=m_birthday}"/>
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Path=m_birthday, StringFormat={}{0:dd/MM/yyyy}}"/>
                 <DataGridTextColumn Header="Comment" Binding="{Binding Path=m_comment}"/>
             </DataGrid.Columns>
         </DataGrid>

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace task3
 {
@@ -41,7 +43,7 @@ namespace task3
                 m_comment   = this.m_comment
             };
         }
-
+        
         public int CompareTo(object obj)
         {
             Contact c = obj as Contact;
@@ -50,16 +52,16 @@ namespace task3
     }
     public class ContactBase:IEnumerable
     {
-        public ObservableCollection<Contact> contacts;
+        public List<Contact> contacts;
         public ContactBase()
         {
-            contacts = new ObservableCollection<Contact>();
+            contacts = new List<Contact>();
             Load();
         }
         public void Add(Contact a)
         {
             contacts.Add(a);
-            this.Sort();
+            contacts.Sort();
         }
         public List<Contact> Search(String req)
         {
@@ -81,7 +83,7 @@ namespace task3
         }
         public void Save()
         {
-            XmlSerializer s = new XmlSerializer(typeof(ObservableCollection<Contact>));
+            XmlSerializer s = new XmlSerializer(typeof(List<Contact>));
             using (FileStream fs = new FileStream("base.xml", FileMode.Truncate))
             {
                 s.Serialize(fs, contacts);
@@ -90,13 +92,13 @@ namespace task3
         public void Load()
         {
             if (!File.Exists("base.xml")) return;
-            XmlSerializer s = new XmlSerializer(typeof(ObservableCollection<Contact>));
+            XmlSerializer s = new XmlSerializer(typeof(List<Contact>));
             using (FileStream fs = new FileStream("base.xml", FileMode.Open))
             {
-                contacts = (ObservableCollection<Contact>)s.Deserialize(fs);
+                contacts = (List<Contact>)s.Deserialize(fs);
             }
         }
-        public void Sort()
+        /*public void Sort()
         {
             var sortableList = new List<Contact>(contacts.Count);
             sortableList.Sort();
@@ -105,7 +107,7 @@ namespace task3
             {
                 contacts.Move(contacts.IndexOf(sortableList[i]), i);
             }
-        }
+        }*/
 
         public IEnumerator GetEnumerator()
         {
