@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="PhoneBook" Height="450" Width="800"
         MinHeight="450" MinWidth="800">
+    <Window.Resources>
+        <CollectionViewSource Source="{Binding}" x:Key="defaultView">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Name" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="23"/>
@@ -19,6 +26,9 @@
             <MenuItem Header="About"></MenuItem>
             <MenuItem Header="Exit" Click="close"></MenuItem>
         </Menu>
+        <TextBlock Name="presets" Grid.Row="1">
+            <Hyperlink NavigateUri="foo" RequestNavigate="Hyperlink_RequestNavigate">ABCD</Hyperlink>
+        </TextBlock>
         <DataGrid Name="grid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
@@ -26,7 +36,7 @@
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Path=m_name}"/>
+                <DataGridTextColumn Header="Name"   Binding="{Binding Path=m_name}"/>
                 <DataGridTextColumn Header="Workphone" Binding="{Binding Path=m_workphone}"/>
                 <DataGridTextColumn Header="Homephone" Binding="{Binding Path=m_homephone}"/>
                 <DataGridTextColumn Header="E-Mail" Binding="{Binding Path=m_email}"/>

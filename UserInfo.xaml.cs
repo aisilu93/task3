@@ -70,13 +70,19 @@ namespace task3
         }
         private void SaveCmd_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            contact.m_birthday = datepicker.SelectedDate.Value.Date.ToString("MMMM", CultureInfo.CreateSpecificCulture("us-US")) + ", "+ datepicker.SelectedDate.Value.Date.Day.ToString();
-            MainWindow mw = this.Owner as MainWindow;
-            if (new_contact) mw.cb.Add(contact);
-            mw.grid.ItemsSource = null;
-            mw.cb.contacts.Sort();
-            mw.grid.ItemsSource = mw.cb.contacts;
-            this.Close();
+            if (ValidateName(name_tb.Text))
+            {
+                if (!String.IsNullOrEmpty(contact.m_birthday))
+                    contact.m_birthday = datepicker.SelectedDate.Value.Date.ToString("MMMM", CultureInfo.CreateSpecificCulture("us-US")) + ", " + datepicker.SelectedDate.Value.Date.Day.ToString();
+                MainWindow mw = this.Owner as MainWindow;
+                if (new_contact) mw.cb.Add(contact);
+                mw.grid.ItemsSource = null;
+                mw.cb.contacts.Sort();
+                mw.grid.ItemsSource = mw.cb.contacts;
+                mw.CreatePresets();
+                this.Close();
+            }
+            name_tb.BorderBrush = Brushes.Red;
         }
         private void DeleteCmd_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -84,7 +90,20 @@ namespace task3
             mw.cb.Delete(contact);
             mw.grid.ItemsSource = null;
             mw.grid.ItemsSource = mw.cb.contacts;
+            mw.CreatePresets();
             this.Close();
+        }
+        private void OnPropertyChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!ValidateName(sender.ToString()))
+                name_tb.BorderBrush = Brushes.Red;
+            SolidColorBrush br=(SolidColorBrush)(new BrushConverter().ConvertFrom("#FFABADB3"));
+            name_tb.BorderBrush = br;
+        }
+        private bool ValidateName(string value=null)
+        {
+            if (!String.IsNullOrEmpty(value) && value.Length > 0) return true;
+            return false;
         }
     }
 }

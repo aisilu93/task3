@@ -25,20 +25,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label      Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15">Name:</Label>
-        <TextBox    Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=m_name}"></TextBox>
+        <TextBox    Name="name_tb" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" FontSize="15" TextChanged="OnPropertyChanged" Text="{Binding Path=m_name, UpdateSourceTrigger=PropertyChanged}"/>
         <Label      Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15">Work:</Label>
-        <TextBox    Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=m_workphone}"></TextBox>
+        <TextBox    Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=m_workphone}"/>
         <Label      Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15">Home:</Label>
-        <TextBox    Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=m_homephone}"></TextBox>
+        <TextBox    Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=m_homephone}"/>
         <Label      Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15">E-Mail:</Label>
-        <TextBox    Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=m_email}"></TextBox>
+        <TextBox    Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=m_email}"/>
         <Label      Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15">Skype:</Label>
-        <TextBox    Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=m_skype}"></TextBox>
+        <TextBox    Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=m_skype}"/>
         <Label      Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15">Birthday:</Label>
-        <DatePicker Name="datepicker" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" FontSize="15" SelectedDate="{Binding Path=m_birthday, StringFormat={}{0:dd.MM}}">
-        </DatePicker>
+        <DatePicker Name="datepicker" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" FontSize="15" SelectedDate="{Binding Path=m_birthday, StringFormat={}{0:dd.MM}}"/>
         <Label      Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,22,0,23">Other:</Label>
-        <TextBox    Grid.Column="1" Grid.Row="6" FontSize="15" Text="{Binding Path=m_comment}"></TextBox>
+        <TextBox    Grid.Column="1" Grid.Row="6" FontSize="15" Text="{Binding Path=m_comment}"/>
         <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" MaxHeight="45" Margin="0,5,5,5">
             <Button Name="uinf_delete" Grid.Column="0" Grid.Row="7" Width="100" HorizontalAlignment="Center" Command="Delete">Delete</Button>
             <Label Margin="5"></Label>
