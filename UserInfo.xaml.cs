@@ -88,8 +88,8 @@ namespace task3
         {
             MainWindow mw = this.Owner as MainWindow;
             mw.cb.Delete(contact);
-            mw.grid.ItemsSource = null;
-            mw.grid.ItemsSource = mw.cb.contacts;
+            //mw.grid.ItemsSource = null;
+            mw.Contacts.Filter = w => ((Contact)w).m_name.Contains("");
             mw.CreatePresets();
             this.Close();
         }

@@ -23,27 +23,28 @@ namespace task3
     public partial class MainWindow : Window
     {
         public ContactBase cb;
-        private ICollectionView defaultView;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            cb = new ContactBase();
+            prepare_view();
+            CreatePresets();
+        }
         public string FilterString
         {
             get { return FilterString; }
             set
             {
                 FilterString = value;
-                defaultView.Refresh();
+                Contacts.Refresh();
             }
         }
-        public MainWindow()
+        public ICollectionView Contacts { get; set; }
+        public void prepare_view()
         {
-            InitializeComponent();
-            cb = new ContactBase();
-            this.defaultView = CollectionViewSource.GetDefaultView(cb.contacts);
-            grid.ItemsSource = defaultView;
-            CreatePresets();
-        }
-        public ICollectionView Contacts
-        {
-            get { return defaultView; }
+            this.Contacts = CollectionViewSource.GetDefaultView(cb.contacts);
+            grid.ItemsSource = Contacts;
         }
         public void close(object sender, RoutedEventArgs e)
         {
@@ -98,8 +99,8 @@ namespace task3
         {
             Hyperlink link = sender as Hyperlink;
             Run r = link.Inlines.FirstInline as Run;
-            if(r.Text == "All") defaultView.Filter = w => ((Contact)w).m_name.Contains("");
-            else defaultView.Filter = w => (((Contact)w).m_name.Contains(r.Text) || ((Contact)w).m_name.Contains(r.Text.ToLower()));
+            if(r.Text == "All") Contacts.Filter = w => ((Contact)w).m_name.Contains("");
+            else Contacts.Filter = w => (((Contact)w).m_name.Contains(r.Text) || ((Contact)w).m_name.Contains(r.Text.ToLower()));
             e.Handled = true;
         }
 

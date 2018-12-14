@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:task3"
         mc:Ignorable="d"
         Title="PhoneBook" Height="450" Width="800"
-        MinHeight="450" MinWidth="800">
+        MinHeight="450" MinWidth="800"
+        >
     <Window.Resources>
         <CollectionViewSource Source="{Binding}" x:Key="defaultView">
             <CollectionViewSource.GroupDescriptions>
@@ -17,7 +18,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="23"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="7*"/>
             <RowDefinition Height="49*"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
@@ -26,10 +27,16 @@
             <MenuItem Header="About"></MenuItem>
             <MenuItem Header="Exit" Click="close"></MenuItem>
         </Menu>
-        <TextBlock Name="presets" Grid.Row="1">
-            <Hyperlink NavigateUri="foo" RequestNavigate="Hyperlink_RequestNavigate">ABCD</Hyperlink>
-        </TextBlock>
-        <DataGrid Name="grid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True">
+        <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="5,5,5,5">
+            <TextBlock Margin="0,0,5,0">Search:</TextBlock>
+            <TextBox Name="searchstring"  Width="300"/>
+            <Label></Label>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Margin="0,0,5,0">Filter:</TextBlock>
+                <TextBlock Name="presets"/>
+            </StackPanel>
+        </WrapPanel>
+        <DataGrid Name="grid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <EventSetter Event="MouseDoubleClick" Handler="grid_click"/>
