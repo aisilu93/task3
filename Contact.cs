@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
-using System.Collections.Specialized;
-using System.ComponentModel;
 
 namespace task3
 {
@@ -29,6 +24,17 @@ namespace task3
         public String m_birthday    { get; set; }
         [XmlAttribute("comment")]
         public String m_comment     { get; set; }
+
+        public Contact()
+        {
+            m_name      = "";
+            m_workphone = "";
+            m_homephone = "";
+            m_email     = "";
+            m_skype     = "";
+            m_birthday  = "";
+            m_comment   = "";
+        }
 
         public object Clone()
         {
