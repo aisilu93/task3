@@ -104,17 +104,6 @@ namespace task3
                 contacts = (List<Contact>)s.Deserialize(fs);
             }
         }
-        /*public void Sort()
-        {
-            var sortableList = new List<Contact>(contacts.Count);
-            sortableList.Sort();
-
-            for (int i = 0; i < sortableList.Count; i++)
-            {
-                contacts.Move(contacts.IndexOf(sortableList[i]), i);
-            }
-        }*/
-
         public IEnumerator GetEnumerator()
         {
             return contacts.GetEnumerator();

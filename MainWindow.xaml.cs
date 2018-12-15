@@ -9,6 +9,7 @@ using System.Windows.Navigation;
 using System.Reactive.Linq;
 using System.Windows.Controls;
 using System.Linq;
+using System.Globalization;
 
 namespace task3
 {
@@ -33,6 +34,7 @@ namespace task3
             cb = new ContactBase();
             prepare_view();
             CreatePresets();
+            FindNearestBirthday();
             var textchanges = Observable.FromEventPattern<TextChangedEventHandler, TextChangedEventArgs>(
                 h => searchstring.TextChanged += h,
                 h => searchstring.TextChanged -= h
@@ -126,6 +128,36 @@ namespace task3
                                                         x.m_comment.ToLower().Contains(filter.ToLower())
                                                         ).ToList();
             return Observable.Return(filteredList);
+        }
+        private void FindNearestBirthday()
+        {
+            DateTime today = DateTime.Today;
+            List<Contact> result;
+            if(today.Day>=30 && today.Month == 12)
+            {
+                if(today.Day==30)
+                    result = cb.contacts.Where(x => !String.IsNullOrEmpty(x.m_birthday) &&
+                    (today == DateTime.ParseExact(x.m_birthday, "MMMM, d", CultureInfo.CreateSpecificCulture("us-US")) ||
+                    today.AddDays(1) == DateTime.ParseExact(x.m_birthday, "MMMM, d", CultureInfo.CreateSpecificCulture("us-US"))||
+                    today.AddDays(2) == DateTime.ParseExact(x.m_birthday, "MMMM, d", CultureInfo.CreateSpecificCulture("us-US")).AddYears(1))
+                    ).ToList();
+                else result = cb.contacts.Where(x => !String.IsNullOrEmpty(x.m_birthday) &&
+                    (today == DateTime.ParseExact(x.m_birthday, "MMMM, d", CultureInfo.CreateSpecificCulture("us-US")) ||
+                    today.AddDays(1) == DateTime.ParseExact(x.m_birthday, "MMMM, d", CultureInfo.CreateSpecificCulture("us-US")).AddYears(1) ||
+                    today.AddDays(2) == DateTime.ParseExact(x.m_birthday, "MMMM, d", CultureInfo.CreateSpecificCulture("us-US")).AddYears(1))
+                    ).ToList();
+            }
+            else result = cb.contacts.Where(x => !String.IsNullOrEmpty(x.m_birthday) &&
+            (today==DateTime.ParseExact(x.m_birthday, "MMMM, d", CultureInfo.CreateSpecificCulture("us-US")) ||
+            today.AddDays(1) == DateTime.ParseExact(x.m_birthday, "MMMM, d", CultureInfo.CreateSpecificCulture("us-US")) ||
+            today.AddDays(2) == DateTime.ParseExact(x.m_birthday, "MMMM, d", CultureInfo.CreateSpecificCulture("us-US")) )
+            ).ToList();
+            result = result.OrderBy(x => x.m_birthday).ToList();
+            nearest_birthday.Text = "Birthday: ";
+            foreach(var item in result)
+            {
+                nearest_birthday.Text += item.m_name + ": " + item.m_birthday+ "    ";
+            }
         }
     }
  }
